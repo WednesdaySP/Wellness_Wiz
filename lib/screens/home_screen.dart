@@ -53,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   // Dummy function to simulate AI response based on user query
   String getAIResponse(String userQuery) {
-    // You can replace this with your actual AI logic
+    
     return 'AI Response for: $userQuery';
   }
 
@@ -70,8 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
           IconButton(
             icon: Icon(Icons.person),
             onPressed: () {
-              // Implement navigation to UserProfileScreen
-              // Navigator.push(context, MaterialPageRoute(builder: (context) => UserProfileScreen()));
+         
             },
           ),
         ],
@@ -113,7 +112,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Color.fromARGB(255, 244, 167, 167), Color.fromARGB(255, 245, 246, 247)],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-          ), // Set your desired ba
+          ), 
               ),
               child: Text(
                 'Swasthya Sathi',
@@ -136,8 +135,7 @@ class _HomeScreenState extends State<HomeScreen> {
               title: Text('Profile'),
               onTap: () {
                 Navigator.pop(context);
-                // Implement navigation to UserProfileScreen
-                // Navigator.push(context, MaterialPageRoute(builder: (context) => UserProfileScreen()));
+              
               },
             ),
              ListTile(
@@ -167,7 +165,7 @@ class _HomeScreenState extends State<HomeScreen> {
               Color.fromARGB(255, 244, 167, 167), Color.fromARGB(255, 245, 246, 247)],
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-            ), // Set your desired ba
+            ), 
           ),
           child: Center(
             child: Column(

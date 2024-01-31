@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:wellness/screens/login.dart';
 import 'dart:async';
 
-import 'package:wellness/screens/onbording_screen.dart';
+
 
 void main() => runApp(MyApp());
 
@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Health Care App',
+      title: 'Swasthya Sathi',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
@@ -57,7 +57,7 @@ class _SplashScreenState extends State<SplashScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset(
-                'assets/images/logo.png', // Replace with your app logo
+                'assets/images/logo.png', 
                 height: 200,
                 width: 200,
               ),
@@ -67,7 +67,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 style: TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
-                  color: const Color.fromARGB(255, 14, 0, 0), // Adjust text color based on your design
+                  color: const Color.fromARGB(255, 14, 0, 0), 
                 ),
               ),
             ],

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wellness/screens/home_screen.dart'; // Import your home screen or any other screen you want to navigate to after login
+import 'package:wellness/screens/home_screen.dart';
 
 
 
@@ -15,7 +15,7 @@ class LoginScreen extends StatelessWidget {
             Color.fromARGB(255, 244, 167, 167), Color.fromARGB(255, 245, 246, 247)],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-          ), // Set your desired bg
+          ), 
         ),
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -23,19 +23,19 @@ class LoginScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Image.asset(
-              'assets/images/logo.png', // Replace with your app logo
+              'assets/images/logo.png',
               height: 180,
               width: 180,
             ),
             SizedBox(height: 20),
             TextField(
-              style: TextStyle(color: Colors.black), // Set text color to white
+              style: TextStyle(color: Colors.black), 
               decoration: InputDecoration(
                 hintText: 'Email Address',
                 hintStyle: TextStyle(color: const Color.fromARGB(179, 42, 41, 41)), // Set hint text color
                 prefixIcon: Icon(Icons.email, color: Colors.black), // Set icon color
                 filled: true,
-                fillColor: Colors.transparent, // Use transparent to make it look like the input is on the background
+                fillColor: Colors.transparent, 
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.black),
                   borderRadius: BorderRadius.circular(10.0),
@@ -69,7 +69,7 @@ class LoginScreen extends StatelessWidget {
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                // Add your login logic here
+                
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(builder: (context) => HomeScreen()),
@@ -77,7 +77,7 @@ class LoginScreen extends StatelessWidget {
               },
               child: Text('Login', style: TextStyle(color: Colors.black)),
               style: ElevatedButton.styleFrom(
-                primary: Color.fromARGB(255, 235, 43, 14), // Use transparent to make it look like the button is on the background
+                primary: Color.fromARGB(255, 235, 43, 14), 
                 elevation: 0, // Remove elevation
                 
                 shape: RoundedRectangleBorder(
