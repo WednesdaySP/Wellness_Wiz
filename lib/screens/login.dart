@@ -36,8 +36,8 @@ class _LoginScreenState extends State<LoginScreen> {
         title: const Text('Login'),
        ),
       
-      body: SingleChildScrollView(
-        child: Container(
+      body: 
+         Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [Color.fromARGB(255, 240, 67, 67),
@@ -122,7 +122,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => HomeScreen()),
+                    MaterialPageRoute(builder: (context) => HomePage()),
                   );
                 },
                 child: Text('Login'),
@@ -151,7 +151,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ],
           ),
         ),
-      ),
+      
     );
   }
 }

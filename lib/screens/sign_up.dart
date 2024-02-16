@@ -134,7 +134,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   // );
         
                    Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => HomeScreen()));
+                          builder: (context) => HomePage()));
                 },
                 child: Text('Create Your Account'),
               ),

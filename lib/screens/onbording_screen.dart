@@ -72,7 +72,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       onPressed: () {
                         Navigator.pushReplacement(
                           context,
-                          MaterialPageRoute(builder: (context) => HomeScreen()),
+                          MaterialPageRoute(builder: (context) => HomePage()),
                         );
                       },
                       child: Text(_currentPage == onboardingData.length - 1
