@@ -1,6 +1,6 @@
-# wellness
+# Sawasthya Sathi
 
-A new Flutter project.
+Healthcare app with supported AI chat system
 
 ## Getting Started
 
