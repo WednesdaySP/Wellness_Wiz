@@ -100,6 +100,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:wellness/screens/location.dart';
 import 'package:wellness/screens/multilang.dart';
 import 'package:wellness/widgets/scheme.dart';
 
@@ -160,18 +161,18 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset(
-                  'assets/images/home.png',
-                  width: 400,
-                  height: 400,
+                  'assets/images/hm.png',
+                  width: 500,
+                  height: 450,
                 ),
-                SizedBox(height: 20),
-                Center(
-                  child: Text(
-                    'Arogyam Sarveshaam Bhavantu, Swastyasathi Sarveshaam Bhavantu',
-                    style: TextStyle(fontSize: 15,),
-                  ),
-                ),
-                SizedBox(height: 20),
+                // SizedBox(height: 20),
+                // Center(
+                //   child: Text(
+                //     'Arogyam Sarveshaam Bhavantu, Swastyasathi Sarveshaam Bhavantu',
+                //     style: TextStyle(fontSize: 15,),
+                //   ),
+                // ),
+                SizedBox(height: 30),
                 ElevatedButton(
                   onPressed: () {
                      Navigator.of(context)
@@ -185,7 +186,9 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       bottomNavigationBar: BottomAppBar(
+        color: Color.fromARGB(255, 249, 204, 204),
         child: Row(
+          
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
             IconButton(
@@ -206,7 +209,7 @@ class _HomePageState extends State<HomePage> {
               icon: Icon(Icons.location_pin),
               onPressed: () {
                 Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) => HomePage()));
+                    .push(MaterialPageRoute(builder: (context) => Coming()));
               },
             ),
             IconButton(

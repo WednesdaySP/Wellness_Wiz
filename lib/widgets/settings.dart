@@ -23,6 +23,7 @@ class SettingsPage extends StatelessWidget {
         ),
         child: Scaffold(
           appBar: AppBar(
+            backgroundColor: Color.fromARGB(255, 233, 85, 85),
             title: Text('Settings'),
             leading: IconButton(
               icon: Icon(Icons.arrow_back),
@@ -52,14 +53,23 @@ class _SettingsBodyState extends State<SettingsBody> {
   void initState() {
     super.initState();
     _user = User(
-      name: 'SM',
+      name: 'Swasthya Sathi',
       profileImageUrl: 'assets/images/logo.png',
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Container(
+       decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Color.fromARGB(255, 240, 67, 67),
+              Color.fromARGB(255, 244, 167, 167), Color.fromARGB(255, 245, 246, 247)],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ), 
+          ),
+         
       padding: EdgeInsets.all(20.0), // Add space around the ListView
       child: ListView(
         children: <Widget>[
@@ -86,7 +96,7 @@ class _SettingsBodyState extends State<SettingsBody> {
                   child: Text(
                     _user.name,
                     style: TextStyle(
-                      color: _isEditingProfile ? Colors.red : null,
+                      color: _isEditingProfile ? Colors.white : null,
                     ),
                   ),
                 ),
@@ -95,7 +105,7 @@ class _SettingsBodyState extends State<SettingsBody> {
                   height: 10,
                 ),
                 _isEditingProfile
-                    ? Icon(Icons.edit, color: Colors.red)
+                    ? Icon(Icons.edit, color: Colors.white)
                     : SizedBox(),
               ],
             ),

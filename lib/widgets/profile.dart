@@ -36,38 +36,50 @@ class _ProfileBodyState extends State<ProfileBody> {
   void initState() {
     super.initState();
     _user = User(
-      name: 'SM',
+      name: 'Swasthya Sathi',
       profileImageUrl: 'assets/images/logo.png',
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          CircleAvatar(
-            backgroundImage: NetworkImage(_user.profileImageUrl),
-            radius: 50,
+    return Container(
+      decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Color.fromARGB(255, 240, 67, 67),
+              Color.fromARGB(255, 244, 167, 167), Color.fromARGB(255, 245, 246, 247)],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ), 
           ),
-          SizedBox(height: 20),
-          Text(_user.name,
-              style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black)),
-          SizedBox(height: 20),
-          ElevatedButton(
-            onPressed: () {
-              // Handle edit profile
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.red, // Change the color of the button
+         
+      padding: EdgeInsets.all(20.0),
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            CircleAvatar(
+              backgroundImage: NetworkImage(_user.profileImageUrl),
+              radius: 50,
             ),
-            child: Text('Edit Profile'),
-          ),
-        ],
+            SizedBox(height: 20),
+            Text(_user.name,
+                style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black)),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                // Handle edit profile
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.red, // Change the color of the button
+              ),
+              child: Text('Edit Profile', style: TextStyle(color: Colors.white),),
+            ),
+          ],
+        ),
       ),
     );
   }

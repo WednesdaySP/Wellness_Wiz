@@ -1,3 +1,1 @@
-// const openAIAPIKey ='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';
-
-const openAIAPIKey ='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';
+const openAIAPIKey ='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';

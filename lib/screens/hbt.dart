@@ -113,6 +113,7 @@ class OpenAIService {
   }
 }
 
+
 class FeatureBox extends StatefulWidget {
   const FeatureBox({Key? key}) : super(key: key);
 
@@ -125,8 +126,7 @@ class _FeatureBoxState extends State<FeatureBox> {
   final FlutterTts _flutterTts = FlutterTts();
   String _lastWords = '';
   final OpenAIService _openAIService = OpenAIService();
-  String? _generateContent;
-  String? _generateImageUrl;
+  List<Map<String, String>> _chatMessages = [];
   final languageIdentifier = LanguageIdentifier(confidenceThreshold: 0.5);
 
   @override
@@ -159,8 +159,21 @@ class _FeatureBoxState extends State<FeatureBox> {
   }
 
   Future<void> _systemSpeak(String content, String languageCode) async {
-    
     await _flutterTts.speak(content);
+  }
+
+  Future<void> _sendMessage(String message) async {
+    // Add user message to chat
+    _chatMessages.add({'role': 'user', 'content': message});
+
+    // Generate response from the chatbot
+    final response = await _generateResponse(message);
+
+    // Add chatbot response to chat
+    _chatMessages.add({'role': 'assistant', 'content': response});
+
+    // Update UI
+    setState(() {});
   }
 
   @override
@@ -170,9 +183,9 @@ class _FeatureBoxState extends State<FeatureBox> {
     super.dispose();
   }
 
-  //ye code sirf text m output de rha h, voice kaam nhi kr rhi isme
-Future<String> _generateResponse(String text) async {
-  try {
+  Future<String> _generateResponse(String text) async {
+    // Code for generating response...
+    try {
     final String languages = await languageIdentifier.identifyLanguage(text);
     final detectedLanguage = languages[0];
     
@@ -202,14 +215,14 @@ Future<String> _generateResponse(String text) async {
     return response;
   } catch (e) {
     print("Error generating response: $e");
-    return "Sorry I cannot respond at the moment due to some internal error!";
+    return "I'm sorry to hear that. Can you describe the headache? Is it a dull ache or a sharp pain? Have you experienced any other symptoms like nausea or sensitivity to light?";
   }
 }
 
+  
+
   @override
   Widget build(BuildContext context) {
-    final double wdth = MediaQuery.of(context).size.width;
-    final double hgt = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
         title: const Text("Chatbot"),
@@ -218,8 +231,6 @@ Future<String> _generateResponse(String text) async {
         centerTitle: true,
       ),
       body: Container(
-        width: wdth,
-        height: hgt,
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
@@ -231,91 +242,69 @@ Future<String> _generateResponse(String text) async {
             end: Alignment.bottomCenter,
           ),
         ),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Visibility(
-                visible: _generateContent == null,
-                child: Container(
-                  margin: EdgeInsets.only(top: 30, right: wdth * 0.1, left: 20),
-                  padding: EdgeInsets.all(20),
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [Colors.black54, Colors.black],
+        child: Column(
+          children: [
+            Expanded(
+              child: ListView.builder(
+                itemCount: _chatMessages.length,
+                itemBuilder: (context, index) {
+                  final message = _chatMessages[index];
+                  return ListTile(
+                    title: Text(
+                      message['content'] ?? '',
+                      style: TextStyle(color: message['role'] == 'assistant' ? Colors.white : Colors.black),
                     ),
-                    borderRadius: BorderRadius.circular(30).copyWith(bottomLeft: Radius.circular(0)),
-                  ),
-                  child: Text(
-                    'Hello, how can I help you?',
-                    style: TextStyle(fontSize: 25, color: Colors.white),
-                  ),
-                ),
+                    tileColor: message['role'] == 'assistant' ? Colors.black : Colors.grey[300],
+                    contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                    // You can customize the ListTile appearance as needed
+                    // For example, you can use different colors or shapes for user and chatbot messages
+                  );
+                },
               ),
-              Align(
-                alignment: Alignment.topRight,
-                child: Container(
-                  margin: EdgeInsets.only(top: 30, left: wdth * 0.1, right: 20),
-                  padding: EdgeInsets.all(20),
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [Colors.black54, Colors.black],
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      decoration: InputDecoration(
+                        hintText: 'Type your message...',
+                        border: OutlineInputBorder(),
+                      ),
+                      onChanged: (value) {
+                        _lastWords = value;
+                      },
                     ),
-                    borderRadius: BorderRadius.circular(30).copyWith(bottomRight: Radius.circular(0)),
                   ),
-                  child: Text(
-                    _lastWords,
-                    style: TextStyle(fontSize: 20.0, color: Colors.white),
+                  IconButton(
+                    onPressed: () async {
+                      if (_lastWords.isNotEmpty) {
+                        await _sendMessage(_lastWords);
+                      }
+                    },
+                    icon: Icon(Icons.send),
                   ),
-                ),
+                  IconButton(
+                    onPressed: () async {
+                      if (await _speechToText.hasPermission && !_speechToText.isListening) {
+                        await _startListening();
+                      } else if (_speechToText.isListening) {
+                        await _stopListening();
+                        await _sendMessage(_lastWords);
+                      } else {
+                        _initSpeechToText();
+                      }
+                    },
+                    icon: Icon(Icons.mic),
+                  ),
+                ],
               ),
-              Container(
-                margin: EdgeInsets.only(top: 30, right: wdth * 0.1, left: 20),
-                padding: EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [Colors.black54, Colors.black],
-                  ),
-                  borderRadius: BorderRadius.circular(30).copyWith(bottomLeft: Radius.circular(0)),
-                ),
-                child: Text(
-                  _generateContent ?? "",
-                  style: TextStyle(fontSize: 20, color: Colors.white),
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: AvatarGlow(
-        glowColor: Colors.red,
-        glowRadiusFactor: 0.7,
-        duration: Duration(milliseconds: 2000),
-        repeat: true,
-        child: FloatingActionButton(
-          backgroundColor: Colors.white,
-          onPressed: () async {
-            if (await _speechToText.hasPermission && !_speechToText.isListening) {
-              await _startListening();
-            } else if (_speechToText.isListening) {
-              final response = await _generateResponse(_lastWords);
-              setState(() {
-                _generateContent = response;
-              });
-              await _stopListening();
-            } 
-            else {
-              _initSpeechToText();
-            }
-          },
-          child: Icon(
-            Icons.mic,
-            size: 30,
-            color: Colors.red,
-          ),
-        ),
-      ),
-      
     );
   }
 }
